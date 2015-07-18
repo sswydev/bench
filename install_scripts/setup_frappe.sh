@@ -340,7 +340,7 @@ setup_debconf() {
 }
 
 install_bench() {
-	run_cmd sudo su $FRAPPE_USER -c "cd /home/$FRAPPE_USER && git clone https://github.com/frappe/bench --branch $BENCH_BRANCH bench-repo"
+	run_cmd sudo su $FRAPPE_USER -c "cd /home/$FRAPPE_USER && git clone https://github.com/sswydev/bench --branch $BENCH_BRANCH bench-repo"
 	if hash pip-2.7 &> /dev/null; then
 		PIP="pip-2.7"
 	elif hash pip2.7 &> /dev/null; then
@@ -359,10 +359,10 @@ install_bench() {
 setup_bench() {
 	echo Installing frappe-bench
 	FRAPPE_BRANCH="develop"
-	ERPNEXT_APPS_JSON="https://raw.githubusercontent.com/frappe/bench/master/install_scripts/erpnext-apps.json"
+	ERPNEXT_APPS_JSON="https://raw.githubusercontent.com/sswydev/bench/master/install_scripts/erpnext-apps.json"
 	if $SETUP_PROD; then
 		FRAPPE_BRANCH="master"
-		ERPNEXT_APPS_JSON="https://raw.githubusercontent.com/frappe/bench/master/install_scripts/erpnext-apps-master.json"
+		ERPNEXT_APPS_JSON="https://raw.githubusercontent.com/sswydev/bench/master/install_scripts/erpnext-apps-master.json"
 	fi
 		
 	run_cmd sudo su $FRAPPE_USER -c "cd /home/$FRAPPE_USER && bench init frappe-bench --frappe-branch $FRAPPE_BRANCH --apps_path $ERPNEXT_APPS_JSON"

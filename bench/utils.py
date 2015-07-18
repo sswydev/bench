@@ -32,7 +32,7 @@ def get_frappe(bench='.'):
 	frappe = get_env_cmd('frappe', bench=bench)
 	if not os.path.exists(frappe):
 		print 'frappe app is not installed. Run the following command to install frappe'
-		print 'bench get-app frappe https://github.com/frappe/frappe.git'
+		print 'bench get-app frappe https://github.com/sswydev/frappe.git'
 	return frappe
 
 def get_env_cmd(cmd, bench='.'):
@@ -60,7 +60,7 @@ def init(path, apps_path=None, no_procfile=False, no_backups=False,
 		prime_wheel_cache(bench=path)
 
 	if not frappe_path:
-		frappe_path = 'https://github.com/frappe/frappe.git'
+		frappe_path = 'https://github.com/sswydev/frappe.git'
 	get_app('frappe', frappe_path, branch=frappe_branch, bench=path, build_asset_files=False)
 	if not no_procfile:
 		setup_procfile(bench=path)
@@ -84,7 +84,7 @@ def exec_cmd(cmd, cwd='.'):
 def setup_env(bench='.'):
 	exec_cmd('virtualenv -q {} -p {}'.format('env', sys.executable), cwd=bench)
 	exec_cmd('./env/bin/pip -q install wheel', cwd=bench)
-	exec_cmd('./env/bin/pip -q install https://github.com/frappe/MySQLdb1/archive/MySQLdb-1.2.5-patched.tar.gz', cwd=bench)
+	exec_cmd('./env/bin/pip -q install https://github.com/sswydev/MySQLdb1/archive/MySQLdb-1.2.5-patched.tar.gz', cwd=bench)
 
 def setup_procfile(bench='.'):
 	from .app import get_current_frappe_version

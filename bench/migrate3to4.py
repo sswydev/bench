@@ -18,7 +18,7 @@ def get_frappe(bench='.'):
 	frappe = os.path.abspath(os.path.join(bench, 'env', 'bin', 'frappe'))
 	if not os.path.exists(frappe):
 		print 'frappe app is not installed. Run the following command to install frappe'
-		print 'bench get-app frappe https://github.com/frappe/frappe.git'
+		print 'bench get-app frappe https://github.com/sswydev/frappe.git'
 	return frappe
 
 def get_sites(bench='.'):
