@@ -58,6 +58,19 @@ def get_app(app, git_url, branch=None, bench='.', build_asset_files=True):
 	if conf.get('restart_supervisor_on_update'):
 		restart_supervisor_processes(bench=bench)
 
+def get_app_svn(app, svn_url, branch=None, bench='.', build_asset_files=True):
+	logger.info('getting app {}'.format(app))
+	shallow_clone = '--depth 1' if check_git_for_shallow_clone() and get_config().get('shallow_clone') else ''
+	branch = '--branch {branch}'.format(branch=branch) if branch else ''
+	exec_cmd("svn checkout http://182.92.178.179/svn/Torino/trunk/{app}",cwd=os.path.join(bench, 'apps'))
+	print 'installing', app
+	install_app(app, bench=bench)
+	if build_asset_files:
+		build_assets(bench=bench)
+	conf = get_config()
+	if conf.get('restart_supervisor_on_update'):
+		restart_supervisor_processes(bench=bench)
+		
 def new_app(app, bench='.'):
 	logger.info('creating new app {}'.format(app))
 	apps = os.path.abspath(os.path.join(bench, 'apps'))
