@@ -364,17 +364,17 @@ setup_bench() {
 		FRAPPE_BRANCH="master"
 		ERPNEXT_APPS_JSON="https://raw.githubusercontent.com/sswydev/bench/master/install_scripts/erpnext-apps-master.json"
 	fi
-		
-	run_cmd sudo su $FRAPPE_USER -c "cd /home/$FRAPPE_USER && bench init frappe-bench --frappe-branch $FRAPPE_BRANCH --apps_path $ERPNEXT_APPS_JSON"
+	
+	run_cmd sudo su $FRAPPE_USER -c "cd /home/$FRAPPE_USER/workspace && bench init frappe-bench --frappe-branch $FRAPPE_BRANCH --apps_path $ERPNEXT_APPS_JSON"
 	echo Setting up first site
-	echo /home/$FRAPPE_USER/frappe-bench > /etc/frappe_bench_dir
-	run_cmd sudo su $FRAPPE_USER -c "cd /home/$FRAPPE_USER/frappe-bench && bench new-site site1.local --mariadb-root-password $MSQ_PASS --admin-password $ADMIN_PASS"
-	run_cmd sudo su $FRAPPE_USER -c "cd /home/$FRAPPE_USER/frappe-bench && bench install-app erpnext"
-	run_cmd bash -c "cd /home/$FRAPPE_USER/frappe-bench && bench setup sudoers $FRAPPE_USER"
+	echo /home/$FRAPPE_USER/workspace/frappe-bench > /etc/frappe_bench_dir
+	run_cmd sudo su $FRAPPE_USER -c "cd /home/$FRAPPE_USER/workspace/frappe-bench && bench new-site site1.local --mariadb-root-password $MSQ_PASS --admin-password $ADMIN_PASS"
+	run_cmd sudo su $FRAPPE_USER -c "cd /home/$FRAPPE_USER/workspace/frappe-bench && bench install-app erpnext"
+	run_cmd bash -c "cd /home/$FRAPPE_USER/workspace/frappe-bench && bench setup sudoers $FRAPPE_USER"
 	if $SETUP_PROD; then
-		run_cmd bash -c "cd /home/$FRAPPE_USER/frappe-bench && bench setup production $FRAPPE_USER"
+		run_cmd bash -c "cd /home/$FRAPPE_USER/workspace/frappe-bench && bench setup production $FRAPPE_USER"
 	fi
-	chown $FRAPPE_USER /home/$FRAPPE_USER/frappe-bench/logs/*
+	chown $FRAPPE_USER /home/$FRAPPE_USER/workspace/frappe-bench/logs/*
 }
 
 add_user() {
